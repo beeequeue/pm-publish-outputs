@@ -12,6 +12,9 @@ importers:
       semver:
         specifier: 7.8.5
         version: 7.8.5
+      tinyexec:
+        specifier: 1.2.4
+        version: 1.2.4
     devDependencies:
       '@e18e/eslint-plugin':
         specifier: 0.5.1
