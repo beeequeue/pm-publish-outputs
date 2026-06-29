@@ -57,7 +57,6 @@
 				]
 			}
 		],
-		"typescript/prefer-readonly-parameter-types": "warn",
 
 		"e18e/ban-dependencies": "error",
 		"e18e/prefer-array-at": "error",

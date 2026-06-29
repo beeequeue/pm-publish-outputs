@@ -2,7 +2,7 @@
 	"name": "@beequeue/pm-publish-outputs-test",
 	"description": "package for testing publishing command outputs",
 	"type": "module",
-	"version": "0.0.0",
+	"version": "0.0.3",
 	"author": "BeeeQueue <adam@haglund.dev>",
 	"license": "MIT"
 }

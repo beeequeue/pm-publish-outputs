@@ -8,3 +8,6 @@ dist/
 !.idea/template.iml
 
 .env
+
+test-package/.npmrc
+test-package/.pnpmauth.ini

@@ -1,0 +1,283 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`npm@10 > 1. publish need-login (noTTY) 1`] = `
+{
+  "code": 1,
+  "stderr": "npm error code ENEEDAUTH
+npm error need auth This command requires you to be logged in to https://registry.npmjs.org/
+npm error need auth You need to authorize this machine using \`npm adduser\`
+npm error A complete log of this run can be found in: C:\\caches\\npm\\_logs\\[date]T[time]-debug-0.log
+",
+  "stdout": "{
+  "error": {
+    "code": "ENEEDAUTH",
+    "summary": "This command requires you to be logged in to https://registry.npmjs.org/",
+    "detail": "You need to authorize this machine using \`npm adduser\`"
+  }
+}
+",
+}
+`;
+
+exports[`npm@10 > 2. publish not allowed (noTTY) 1`] = `
+{
+  "code": 1,
+  "stderr": "npm notice Publishing to https://registry.npmjs.org/ with tag latest and default access
+npm error code E403
+npm error 403 403 Forbidden - PUT https://registry.npmjs.org/@beequeue%2fpm-publish-outputs-test - You may not perform that action with these credentials.
+npm error 403 In most cases, you or one of your dependencies are requesting
+npm error 403 a package version that is forbidden by your security policy, or
+npm error 403 on a server you do not have access to.
+npm error A complete log of this run can be found in: C:\\caches\\npm\\_logs\\[date]T[time]-debug-0.log
+",
+  "stdout": "{
+  "error": {
+    "code": "E403",
+    "summary": "403 Forbidden - PUT https://registry.npmjs.org/@beequeue%2fpm-publish-outputs-test - You may not perform that action with these credentials.",
+    "detail": "In most cases, you or one of your dependencies are requesting\\na package version that is forbidden by your security policy, or\\non a server you do not have access to."
+  }
+}
+",
+}
+`;
+
+exports[`npm@10 > 3. publish need-2fa (noTTY) 1`] = `
+{
+  "code": 1,
+  "stderr": "npm notice Publishing to https://registry.npmjs.org/ with tag latest and default access
+npm error code EOTP
+npm error This operation requires a one-time password from your authenticator.
+npm error You can provide a one-time password by passing --otp=<code> to the command you ran.
+npm error If you already provided a one-time password then it is likely that you either typoed
+npm error it, or it timed out. Please try again.
+npm error A complete log of this run can be found in: C:\\caches\\npm\\_logs\\[date]T[time]-debug-0.log
+",
+  "stdout": "{
+  "error": {
+    "code": "EOTP",
+    "summary": "This operation requires a one-time password from your authenticator.",
+    "detail": "You can provide a one-time password by passing --otp=<code> to the command you ran.\\nIf you already provided a one-time password then it is likely that you either typoed\\nit, or it timed out. Please try again."
+  }
+}
+",
+}
+`;
+
+exports[`npm@10 > 4. publish already-published (noTTY) 1`] = `
+{
+  "code": 1,
+  "stderr": "npm notice Publishing to https://registry.npmjs.org/ with tag latest and default access
+npm error code E403
+npm error 403 403 Forbidden - PUT https://registry.npmjs.org/@beequeue%2fpm-publish-outputs-test - You cannot publish over the previously published versions: 0.0.3.
+npm error 403 In most cases, you or one of your dependencies are requesting
+npm error 403 a package version that is forbidden by your security policy, or
+npm error 403 on a server you do not have access to.
+npm error A complete log of this run can be found in: C:\\caches\\npm\\_logs\\[date]T[time]-debug-0.log
+",
+  "stdout": "{
+  "error": {
+    "code": "E403",
+    "summary": "403 Forbidden - PUT https://registry.npmjs.org/@beequeue%2fpm-publish-outputs-test - You cannot publish over the previously published versions: 0.0.3.",
+    "detail": "In most cases, you or one of your dependencies are requesting\\na package version that is forbidden by your security policy, or\\non a server you do not have access to."
+  }
+}
+",
+}
+`;
+
+exports[`npm@11 > 1. publish need-login (noTTY) 1`] = `
+{
+  "code": 1,
+  "stderr": "npm warn Unknown cli config "--git-checks". This will stop working in the next major version of npm.
+npm error code ENEEDAUTH
+npm error need auth This command requires you to be logged in to https://registry.npmjs.org/
+npm error need auth You need to authorize this machine using \`npm adduser\`
+npm error A complete log of this run can be found in: C:\\caches\\npm\\_logs\\[date]T[time]-debug-0.log
+",
+  "stdout": "{
+  "error": {
+    "code": "ENEEDAUTH",
+    "summary": "This command requires you to be logged in to https://registry.npmjs.org/",
+    "detail": "You need to authorize this machine using \`npm adduser\`"
+  }
+}
+",
+}
+`;
+
+exports[`npm@11 > 2. publish not allowed (noTTY) 1`] = `
+{
+  "code": 1,
+  "stderr": "npm warn Unknown cli config "--git-checks". This will stop working in the next major version of npm.
+npm notice Publishing to https://registry.npmjs.org/ with tag latest and default access
+npm error code E403
+npm error 403 403 Forbidden - PUT https://registry.npmjs.org/@beequeue%2fpm-publish-outputs-test - You may not perform that action with these credentials.
+npm error 403 In most cases, you or one of your dependencies are requesting a package version that is forbidden by your security policy, or on a server you do not have access to.
+npm error A complete log of this run can be found in: C:\\caches\\npm\\_logs\\[date]T[time]-debug-0.log
+",
+  "stdout": "{
+  "error": {
+    "code": "E403",
+    "summary": "403 Forbidden - PUT https://registry.npmjs.org/@beequeue%2fpm-publish-outputs-test - You may not perform that action with these credentials.",
+    "detail": "In most cases, you or one of your dependencies are requesting a package version that is forbidden by your security policy, or on a server you do not have access to."
+  }
+}
+",
+}
+`;
+
+exports[`npm@11 > 3. publish need-2fa (noTTY) 1`] = `
+{
+  "code": 1,
+  "stderr": "npm warn Unknown cli config "--git-checks". This will stop working in the next major version of npm.
+npm notice Publishing to https://registry.npmjs.org/ with tag latest and default access
+npm error code EOTP
+npm error This operation requires a one-time password.
+npm error Open this URL in your browser to authenticate:
+npm error   https://www.npmjs.com/auth/cli/***
+npm error
+npm error After authenticating, your token can be retrieved from:
+npm error   https://registry.npmjs.org/-/v1/done?authId=***
+npm error A complete log of this run can be found in: C:\\caches\\npm\\_logs\\[date]T[time]-debug-0.log
+",
+  "stdout": "{
+  "error": {
+    "code": "EOTP",
+    "summary": "This operation requires a one-time password.",
+    "detail": "Open this URL in your browser to authenticate:\\n  https://www.npmjs.com/auth/cli/[uuid]\\n\\nAfter authenticating, your token can be retrieved from:\\n  https://registry.npmjs.org/-/v1/done?authId=[uuid]",
+    "authUrl": "https://www.npmjs.com/auth/cli/[uuid]",
+    "doneUrl": "https://registry.npmjs.org/-/v1/done?authId=[uuid]"
+  }
+}
+",
+}
+`;
+
+exports[`npm@11 > 4. publish already-published (noTTY) 1`] = `
+{
+  "code": 1,
+  "stderr": "npm warn Unknown cli config "--git-checks". This will stop working in the next major version of npm.
+npm error You cannot publish over the previously published versions: 0.0.3.
+npm error A complete log of this run can be found in: C:\\caches\\npm\\_logs\\[date]T[time]-debug-0.log
+",
+  "stdout": "{
+  "error": {
+    "summary": "You cannot publish over the previously published versions: 0.0.3.",
+    "detail": ""
+  }
+}
+",
+}
+`;
+
+exports[`pnpm@10 > 1. publish need-login (noTTY) 1`] = `
+{
+  "code": 1,
+  "stderr": "",
+  "stdout": "{
+  "error": {
+    "code": "E404",
+    "message": "404 Not Found - PUT https://registry.npmjs.org/@beequeue%2fpm-publish-outputs-test - Not found"
+  }
+}
+",
+}
+`;
+
+exports[`pnpm@10 > 2. publish not allowed (noTTY) 1`] = `
+{
+  "code": 1,
+  "stderr": "",
+  "stdout": "{
+  "error": {
+    "code": "E403",
+    "message": "403 Forbidden - PUT https://registry.npmjs.org/@beequeue%2fpm-publish-outputs-test - You may not perform that action with these credentials."
+  }
+}
+",
+}
+`;
+
+exports[`pnpm@10 > 3. publish need-2fa (noTTY) 1`] = `
+{
+  "code": 1,
+  "stderr": "",
+  "stdout": "{
+  "error": {
+    "code": "ERR_PNPM_OTP_NON_INTERACTIVE",
+    "message": "The registry requires additional authentication, but pnpm is not running in an interactive terminal"
+  }
+}
+",
+}
+`;
+
+exports[`pnpm@10 > 4. publish already-published (noTTY) 1`] = `
+{
+  "code": 1,
+  "stderr": "",
+  "stdout": "{
+  "error": {
+    "code": "E403",
+    "message": "403 Forbidden - PUT https://registry.npmjs.org/@beequeue%2fpm-publish-outputs-test - You cannot publish over the previously published versions: 0.0.3."
+  }
+}
+",
+}
+`;
+
+exports[`pnpm@11 > 1. publish need-login (noTTY) 1`] = `
+{
+  "code": 1,
+  "stderr": "",
+  "stdout": "{
+  "error": {
+    "code": "E404",
+    "message": "404 Not Found - PUT https://registry.npmjs.org/@beequeue%2fpm-publish-outputs-test - Not found"
+  }
+}
+",
+}
+`;
+
+exports[`pnpm@11 > 2. publish not allowed (noTTY) 1`] = `
+{
+  "code": 1,
+  "stderr": "",
+  "stdout": "{
+  "error": {
+    "code": "E403",
+    "message": "403 Forbidden - PUT https://registry.npmjs.org/@beequeue%2fpm-publish-outputs-test - You may not perform that action with these credentials."
+  }
+}
+",
+}
+`;
+
+exports[`pnpm@11 > 3. publish need-2fa (noTTY) 1`] = `
+{
+  "code": 1,
+  "stderr": "",
+  "stdout": "{
+  "error": {
+    "code": "ERR_PNPM_OTP_NON_INTERACTIVE",
+    "message": "The registry requires additional authentication, but pnpm is not running in an interactive terminal"
+  }
+}
+",
+}
+`;
+
+exports[`pnpm@11 > 4. publish already-published (noTTY) 1`] = `
+{
+  "code": 1,
+  "stderr": "",
+  "stdout": "{
+  "error": {
+    "code": "E403",
+    "message": "403 Forbidden - PUT https://registry.npmjs.org/@beequeue%2fpm-publish-outputs-test - You cannot publish over the previously published versions: 0.0.3."
+  }
+}
+",
+}
+`;
