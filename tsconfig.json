@@ -1,0 +1,22 @@
+{
+	"extends": ["@tsconfig/node26/tsconfig.json", "@tsconfig/strictest/tsconfig.json"],
+	"compilerOptions": {
+		// Output
+		"noEmit": true,
+
+		// Modules & resolution
+		"module": "esnext",
+		"moduleResolution": "bundler",
+		"resolveJsonModule": true,
+		"allowImportingTsExtensions": true,
+
+		// Lessen strictness
+		"noImplicitReturns": false,
+		"noPropertyAccessFromIndexSignature": false,
+		"exactOptionalPropertyTypes": false,
+
+		// Extra types
+		"types": ["node"]
+	},
+	"include": ["./"]
+}

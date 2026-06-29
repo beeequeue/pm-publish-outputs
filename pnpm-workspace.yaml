@@ -1,0 +1,12 @@
+allowBuilds:
+  simple-git-hooks: false
+
+dedupePeers: true
+dedupePeerDependents: true
+
+minimumReleaseAge: 4320
+
+savePrefix: ""
+shellEmulator: true
+
+trustPolicy: no-downgrade

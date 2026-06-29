@@ -1,0 +1,50 @@
+{
+	"name": "pm-publish-outputs",
+	"type": "module",
+	"private": true,
+	"version": "0.0.0",
+	"author": "BeeeQueue <adam@haglund.dev>",
+	"license": "MIT",
+	"packageManager": "pnpm@11.9.0",
+	"engines": {
+		"node": "^26"
+	},
+	"files": [
+		"dist"
+	],
+	"exports": {
+		".": "./dist/index.mjs",
+		"./package.json": "./package.json"
+	},
+	"lint-staged": {
+		"*.{js,jsx,mjs,cjs,ts,tsx,mts,cts,json,json5,yaml,yml,css,scss,md}": [
+			"oxfmt --write --no-error-on-unmatched-pattern"
+		]
+	},
+	"simple-git-hooks": {
+		"pre-commit": "./node_modules/.bin/lint-staged"
+	},
+	"scripts": {
+		"build": "tsdown",
+		"lint": "oxlint",
+		"lint:format": "oxfmt --check",
+		"test": "node --test",
+		"typecheck": "tsc --noEmit"
+	},
+	"dependencies": {
+		"semver": "7.8.5"
+	},
+	"devDependencies": {
+		"@e18e/eslint-plugin": "0.5.1",
+		"@tsconfig/node26": "26.0.0",
+		"@tsconfig/strictest": "2.0.8",
+		"@types/node": "26.0.1",
+		"lint-staged": "17.0.8",
+		"oxfmt": "0.56.0",
+		"oxlint": "1.71.0",
+		"oxlint-tsgolint": "0.23.0",
+		"simple-git-hooks": "2.13.1",
+		"tsdown": "0.22.3",
+		"typescript": "6.0.3"
+	}
+}
