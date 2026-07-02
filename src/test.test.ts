@@ -9,6 +9,8 @@ import { x } from "tinyexec"
 import type { Options, Output } from "tinyexec"
 import { afterAll, beforeEach, describe, expect, it } from "vitest"
 
+import testPackageManifest from "../test-package/package.json" with { type: "json" }
+
 const requiredTokens = [
 	// can only read the testing package
 	"NPM_READONLY_TOKEN",
@@ -41,10 +43,12 @@ const readEnvFile = async (): Promise<Env> => {
 
 const env = await readEnvFile()
 
-const redactOutput = (output: string) =>
+const cleanOutput = (output: string) =>
 	output
 		// fix path separators
 		.replace(/\\\\/g, "/")
+		// remove package name
+		.replace(new RegExp(testPackageManifest.name.replace("/", ".+?"), "g"), "[pkg-name]")
 		// redact dates
 		.replace(/\d{4}-\d{1,2}-\d{1,2}/g, "[date]")
 		// redact times
@@ -59,8 +63,8 @@ const redactOutput = (output: string) =>
 function assertMatchesSnapshot(result: Output) {
 	expect({
 		code: result.exitCode,
-		stdout: removeAnsi(redactOutput(result.stdout)),
-		stderr: removeAnsi(redactOutput(result.stderr)),
+		stdout: removeAnsi(cleanOutput(result.stdout)),
+		stderr: removeAnsi(cleanOutput(result.stderr)),
 	}).toMatchSnapshot()
 }
 
@@ -138,7 +142,7 @@ async function updateTestManifest(fn: (manifest: { version: string }) => void) {
 
 const resetTestManifestVersion = async () =>
 	updateTestManifest((manifest) => {
-		manifest.version = "0.0.3"
+		manifest.version = testPackageManifest.version
 	})
 
 const bumpTestManifest = async (type: "patch" | "minor" | "major" = "patch") =>
