@@ -49,6 +49,16 @@ const cleanOutput = (output: string) =>
 		.replace(/\\\\/g, "/")
 		// remove package name
 		.replace(new RegExp(testPackageManifest.name.replace("/", ".+?"), "g"), "[pkg-name]")
+		// remove package version 1
+		.replace(
+			new RegExp(testPackageManifest.version.replace(/\./g, "\\."), "g"),
+			"[current-version]",
+		)
+		// remove package version 2
+		.replace(
+			new RegExp(inc(testPackageManifest.version, "patch")!.replace(/\./g, "\\."), "g"),
+			"[next-version]",
+		)
 		// redact dates
 		.replace(/\d{4}-\d{1,2}-\d{1,2}/g, "[date]")
 		// redact times
@@ -145,9 +155,9 @@ const resetTestManifestVersion = async () =>
 		manifest.version = testPackageManifest.version
 	})
 
-const bumpTestManifest = async (type: "patch" | "minor" | "major" = "patch") =>
+const bumpTestManifest = async () =>
 	updateTestManifest((manifest) => {
-		manifest.version = inc(manifest.version, type)!
+		manifest.version = inc(manifest.version, "patch")!
 	})
 
 let cleanup = await initPackageManagers()

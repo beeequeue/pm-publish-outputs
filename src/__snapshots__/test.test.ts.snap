@@ -68,7 +68,7 @@ exports[`npm@10 > 4. publish already-published (noTTY) 1`] = `
   "code": 1,
   "stderr": "npm notice Publishing to https://registry.npmjs.org/ with tag latest and default access
 npm error code E403
-npm error 403 403 Forbidden - PUT https://registry.npmjs.org/[pkg-name] - You cannot publish over the previously published versions: 0.0.3.
+npm error 403 403 Forbidden - PUT https://registry.npmjs.org/[pkg-name] - You cannot publish over the previously published versions: [current-version].
 npm error 403 In most cases, you or one of your dependencies are requesting
 npm error 403 a package version that is forbidden by your security policy, or
 npm error 403 on a server you do not have access to.
@@ -77,7 +77,7 @@ npm error A complete log of this run can be found in: C:\\caches\\npm\\_logs\\[d
   "stdout": "{
   "error": {
     "code": "E403",
-    "summary": "403 Forbidden - PUT https://registry.npmjs.org/[pkg-name] - You cannot publish over the previously published versions: 0.0.3.",
+    "summary": "403 Forbidden - PUT https://registry.npmjs.org/[pkg-name] - You cannot publish over the previously published versions: [current-version].",
     "detail": "In most cases, you or one of your dependencies are requesting\\na package version that is forbidden by your security policy, or\\non a server you do not have access to."
   }
 }
@@ -157,12 +157,12 @@ exports[`npm@11 > 4. publish already-published (noTTY) 1`] = `
 {
   "code": 1,
   "stderr": "npm warn Unknown cli config "--git-checks". This will stop working in the next major version of npm.
-npm error You cannot publish over the previously published versions: 0.0.3.
+npm error You cannot publish over the previously published versions: [current-version].
 npm error A complete log of this run can be found in: C:\\caches\\npm\\_logs\\[date]T[time]-debug-0.log
 ",
   "stdout": "{
   "error": {
-    "summary": "You cannot publish over the previously published versions: 0.0.3.",
+    "summary": "You cannot publish over the previously published versions: [current-version].",
     "detail": ""
   }
 }
@@ -238,12 +238,12 @@ npm error A complete log of this run can be found in: C:\\caches\\npm\\_logs\\[d
 exports[`pnpm@10 > 4. publish already-published (noTTY) 1`] = `
 {
   "code": 1,
-  "stderr": "npm error You cannot publish over the previously published versions: 0.0.3.
+  "stderr": "npm error You cannot publish over the previously published versions: [current-version].
 npm error A complete log of this run can be found in: C:\\caches\\npm\\_logs\\[date]T[time]-debug-0.log
 ",
   "stdout": "{
   "error": {
-    "summary": "You cannot publish over the previously published versions: 0.0.3.",
+    "summary": "You cannot publish over the previously published versions: [current-version].",
     "detail": ""
   }
 }
@@ -300,7 +300,7 @@ exports[`pnpm@11 > 4. publish already-published (noTTY) 1`] = `
   "stdout": "{
   "error": {
     "code": "E403",
-    "message": "403 Forbidden - PUT https://registry.npmjs.org/[pkg-name] - You cannot publish over the previously published versions: 0.0.3."
+    "message": "403 Forbidden - PUT https://registry.npmjs.org/[pkg-name] - You cannot publish over the previously published versions: [current-version]."
   }
 }
 ",
