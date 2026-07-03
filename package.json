@@ -24,15 +24,7 @@
   "simple-git-hooks": {
     "pre-commit": "./node_modules/.bin/lint-staged"
   },
-  "scripts": {
-    "build": "tsdown",
-    "lint": "oxlint",
-    "lint:format": "oxfmt --check",
-    "test": "vitest",
-    "typecheck": "tsc --noEmit"
-  },
   "dependencies": {
-    "alleviate": "0.1.1",
     "semver": "7.8.5",
     "tinyexec": "1.2.4"
   },

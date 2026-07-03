@@ -1,0 +1,7 @@
+services:
+  instance:
+    build: .
+    entrypoint: ["sleep", "infinity"]
+    volumes:
+      - ./:/app
+

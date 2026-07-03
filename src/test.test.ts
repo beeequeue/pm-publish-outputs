@@ -43,9 +43,10 @@ const readEnvFile = async (): Promise<Env> => {
 
 const env = await readEnvFile()
 
+const normalizePathSeparators = (value: string) => value.replaceAll("\\", "/")
+
 const cleanOutput = (output: string) =>
-	output
-		// fix path separators
+	normalizePathSeparators(output)
 		.replace(/\\\\/g, "/")
 		// remove package name
 		.replace(new RegExp(testPackageManifest.name.replace("/", ".+?"), "g"), "[pkg-name]")
@@ -59,6 +60,11 @@ const cleanOutput = (output: string) =>
 			new RegExp(inc(testPackageManifest.version, "patch")!.replace(/\./g, "\\."), "g"),
 			"[next-version]",
 		)
+		// redact machine-specific npm cache path
+		.replace(/in: .*?\/\.?npm\/_logs\//, "in: [npm-cache]/npm/_logs/")
+		// normalize redacted npm auth URLs
+		.replace(/auth\/cli\/(?:[a-z0-9-]{36}|\*\*\*)/g, "auth/cli/[uuid]")
+		.replace(/authId=(?:[a-z0-9-]{36}|\*\*\*)/g, "authId=[uuid]")
 		// redact dates
 		.replace(/\d{4}-\d{1,2}-\d{1,2}/g, "[date]")
 		// redact times
@@ -89,31 +95,8 @@ const execOptions = (tty: "tty" | "no-tty" = "no-tty"): Partial<Options> => ({
 const instances = {
 	pnpm: ["10", "11"],
 	npm: ["10", "11"],
-	// yarn: ["3", "4"],
+	// yarn: ["4"],
 } as const
-
-const keep = new Set(["pnpm@11"])
-
-const allInstances = new Set(
-	Object.keys(instances).flatMap((pmName) => {
-		const versions = instances[pmName as keyof typeof instances]
-		return versions.map((version) => `${pmName}@${version}`)
-	}),
-)
-
-async function initPackageManagers() {
-	const versionsToInstall = allInstances.difference(keep)
-	await x("mise", ["install", ...versionsToInstall], { throwOnError: true })
-
-	return async () => {
-		const versionsToUninstall = allInstances.difference(keep)
-
-		const result = await x("mise", ["uninstall", "-y", ...versionsToUninstall])
-		if (result.exitCode !== 0) {
-			throw new Error("Failed to uninstall:\n" + result.stderr)
-		}
-	}
-}
 
 const homeDir = process.env.HOME ?? process.env.userprofile!
 const pmFuncs = {
@@ -160,10 +143,7 @@ const bumpTestManifest = async () =>
 		manifest.version = inc(manifest.version, "patch")!
 	})
 
-let cleanup = await initPackageManagers()
-
 afterAll(async () => {
-	await cleanup()
 })
 
 beforeEach(async () => {
