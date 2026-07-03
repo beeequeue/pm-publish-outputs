@@ -11,3 +11,5 @@ dist/
 
 test-package/.npmrc
 test-package/.pnpmauth.ini
+test-package/.yarn/
+test-package/.yarnrc.yml

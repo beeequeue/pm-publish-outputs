@@ -88,8 +88,7 @@ npm error A complete log of this run can be found in: [npm-cache]/npm/_logs/[dat
 exports[`npm@11 > 1. publish need-login (noTTY) 1`] = `
 {
   "code": 1,
-  "stderr": "npm warn Unknown cli config "--git-checks". This will stop working in the next major version of npm.
-npm error code ENEEDAUTH
+  "stderr": "npm error code ENEEDAUTH
 npm error need auth This command requires you to be logged in to https://registry.npmjs.org/
 npm error need auth You need to authorize this machine using \`npm adduser\`
 npm error A complete log of this run can be found in: [npm-cache]/npm/_logs/[date]T[time]-debug-0.log
@@ -108,8 +107,7 @@ npm error A complete log of this run can be found in: [npm-cache]/npm/_logs/[dat
 exports[`npm@11 > 2. publish not allowed (noTTY) 1`] = `
 {
   "code": 1,
-  "stderr": "npm warn Unknown cli config "--git-checks". This will stop working in the next major version of npm.
-npm notice Publishing to https://registry.npmjs.org/ with tag latest and default access
+  "stderr": "npm notice Publishing to https://registry.npmjs.org/ with tag latest and default access
 npm error code E403
 npm error 403 403 Forbidden - PUT https://registry.npmjs.org/[pkg-name] - You may not perform that action with these credentials.
 npm error 403 In most cases, you or one of your dependencies are requesting a package version that is forbidden by your security policy, or on a server you do not have access to.
@@ -129,8 +127,7 @@ npm error A complete log of this run can be found in: [npm-cache]/npm/_logs/[dat
 exports[`npm@11 > 3. publish need-2fa (noTTY) 1`] = `
 {
   "code": 1,
-  "stderr": "npm warn Unknown cli config "--git-checks". This will stop working in the next major version of npm.
-npm notice Publishing to https://registry.npmjs.org/ with tag latest and default access
+  "stderr": "npm notice Publishing to https://registry.npmjs.org/ with tag latest and default access
 npm error code EOTP
 npm error This operation requires a one-time password.
 npm error Open this URL in your browser to authenticate:
@@ -156,8 +153,7 @@ npm error A complete log of this run can be found in: [npm-cache]/npm/_logs/[dat
 exports[`npm@11 > 4. publish already-published (noTTY) 1`] = `
 {
   "code": 1,
-  "stderr": "npm warn Unknown cli config "--git-checks". This will stop working in the next major version of npm.
-npm error You cannot publish over the previously published versions: [current-version].
+  "stderr": "npm error You cannot publish over the previously published versions: [current-version].
 npm error A complete log of this run can be found in: [npm-cache]/npm/_logs/[date]T[time]-debug-0.log
 ",
   "stdout": "{
@@ -303,6 +299,54 @@ exports[`pnpm@11 > 4. publish already-published (noTTY) 1`] = `
     "message": "403 Forbidden - PUT https://registry.npmjs.org/[pkg-name] - You cannot publish over the previously published versions: [current-version]."
   }
 }
+",
+}
+`;
+
+exports[`yarn@4 > 1. publish need-login (noTTY) 1`] = `
+{
+  "code": 1,
+  "stderr": "",
+  "stdout": "Usage Error: Unrecognized configuration settings found: npmScopes['beequeue'].nodeLinker - run "yarn config" to see the list of settings supported in Yarn in /app/test-package/.yarnrc.yml (in /app/test-package/.yarnrc.yml)
+
+━━━ Yarn Package Manager - 4.17.0 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  $ yarn <command>
+
+You can also print more details about any of these commands by calling them with 
+the \`-h,--help\` flag right after the command name.
+",
+}
+`;
+
+exports[`yarn@4 > 2. publish not allowed (noTTY) 1`] = `
+{
+  "code": 1,
+  "stderr": "",
+  "stdout": "{"file":".pnpmauth.ini"}
+{"file":"package.json"}
+{"file":"pnpm-workspace.yaml"}
+{"type":"error","name":35,"displayName":"YN0035","indent":"","data":"You may not perform that action with these credentials."}
+{"type":"error","name":35,"displayName":"YN0035","indent":"","data":"  Response Code: 403 (Forbidden)"}
+{"type":"error","name":35,"displayName":"YN0035","indent":"","data":"  Request Method: PUT"}
+{"type":"error","name":35,"displayName":"YN0035","indent":"","data":"  Request URL: https://registry.npmjs.org/[pkg-name]"}
+{"type":"error","name":0,"displayName":"YN0000","indent":"","data":"Failed with errors in 0s 305ms"}
+",
+}
+`;
+
+exports[`yarn@4 > 4. publish already-published (noTTY) 1`] = `
+{
+  "code": 1,
+  "stderr": "",
+  "stdout": "{"file":".pnpmauth.ini"}
+{"file":"package.json"}
+{"file":"pnpm-workspace.yaml"}
+{"type":"error","name":35,"displayName":"YN0035","indent":"","data":"You cannot publish over the previously published versions: [current-version]."}
+{"type":"error","name":35,"displayName":"YN0035","indent":"","data":"  Response Code: 403 (Forbidden)"}
+{"type":"error","name":35,"displayName":"YN0035","indent":"","data":"  Request Method: PUT"}
+{"type":"error","name":35,"displayName":"YN0035","indent":"","data":"  Request URL: https://registry.npmjs.org/[pkg-name]"}
+{"type":"error","name":0,"displayName":"YN0000","indent":"","data":"Failed with errors in 0s 851ms"}
 ",
 }
 `;

@@ -1,13 +1,13 @@
 // oxlint-disable vitest/expect-expect
 import { existsSync } from "node:fs"
 import fs from "node:fs/promises"
-import { stripVTControlCharacters as removeAnsi, parseEnv } from "node:util"
+import { parseEnv, stripVTControlCharacters as removeAnsi } from "node:util"
 import path from "path"
 
 import { inc } from "semver"
-import { x } from "tinyexec"
 import type { Options, Output } from "tinyexec"
-import { afterAll, beforeEach, describe, expect, it } from "vitest"
+import { x } from "tinyexec"
+import { beforeEach, describe, expect, it } from "vitest"
 
 import testPackageManifest from "../test-package/package.json" with { type: "json" }
 
@@ -100,8 +100,8 @@ const instances = {
 
 const yarnScopeMatch = /^@([^/]+)\//.exec(testPackageManifest.name)
 const yarnAuthConfig = (token?: string) => {
+	const baseLines = ['nodeLinker: "pnpm"']
 	const registryLines = [
-		'nodeLinker: "pnpm"',
 		`npmPublishRegistry: "https://registry.npmjs.org"`,
 		`npmRegistryServer: "https://registry.npmjs.org"`,
 	]
@@ -109,19 +109,15 @@ const yarnAuthConfig = (token?: string) => {
 		token == null ? [] : [`npmAlwaysAuth: true`, `npmAuthToken: ${JSON.stringify(token)}`]
 
 	if (yarnScopeMatch == null) {
-		return [
-			...registryLines,
-			...authLines,
-			"",
-		].join("\n")
+		return [...baseLines, ...registryLines, ...authLines, ""].join("\n")
 	}
 
 	return [
-		""
+		...baseLines,
 		"npmScopes:",
 		`  ${JSON.stringify(yarnScopeMatch[1])}:`,
-		...registryLines.map(line => `    ${line}`),
-		...authLines.map(line => `    ${line}`),
+		...registryLines.map((line) => `    ${line}`),
+		...authLines.map((line) => `    ${line}`),
 		"",
 	].join("\n")
 }
@@ -166,6 +162,44 @@ const pmFuncs = {
 		},
 	},
 } as const
+
+const publishArgs = {
+	pnpm: (version: string, _options?: { otp?: string }) => [
+		"mise",
+		"exec",
+		`pnpm@${version}`,
+		"--",
+		"pnpm",
+		"publish",
+		"--json",
+		"--no-git-checks",
+	],
+	npm: (version: string, _options?: { otp?: string }) => [
+		"mise",
+		"exec",
+		`npm@${version}`,
+		"--",
+		"npm",
+		"publish",
+		"--json",
+	],
+	yarn: (version: string, options?: { otp?: string }) => [
+		"mise",
+		"exec",
+		`yarn@${version}`,
+		"--",
+		"yarn",
+		"npm",
+		"publish",
+		"--json",
+		"--access",
+		"public",
+		...(options?.otp == null ? [] : ["--otp", options.otp]),
+	],
+} satisfies Record<
+	keyof typeof instances,
+	(version: string, options?: { otp?: string }) => string[]
+>
 
 async function updateTestManifest(fn: (manifest: { version: string }) => void) {
 	const filePath = path.join(testPackageDir, "package.json")
