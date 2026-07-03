@@ -5,6 +5,7 @@ export default defineConfig({
 		reporters: ["verbose"],
 
 		maxConcurrency: 1,
+		testTimeout: 2000,
 
 		experimental: {
 			viteModuleRunner: false,

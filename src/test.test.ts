@@ -95,8 +95,36 @@ const execOptions = (tty: "tty" | "no-tty" = "no-tty"): Partial<Options> => ({
 const instances = {
 	pnpm: ["10", "11"],
 	npm: ["10", "11"],
-	// yarn: ["4"],
+	yarn: ["4"],
 } as const
+
+const yarnScopeMatch = /^@([^/]+)\//.exec(testPackageManifest.name)
+const yarnAuthConfig = (token?: string) => {
+	const registryLines = [
+		'nodeLinker: "pnpm"',
+		`npmPublishRegistry: "https://registry.npmjs.org"`,
+		`npmRegistryServer: "https://registry.npmjs.org"`,
+	]
+	const authLines =
+		token == null ? [] : [`npmAlwaysAuth: true`, `npmAuthToken: ${JSON.stringify(token)}`]
+
+	if (yarnScopeMatch == null) {
+		return [
+			...registryLines,
+			...authLines,
+			"",
+		].join("\n")
+	}
+
+	return [
+		""
+		"npmScopes:",
+		`  ${JSON.stringify(yarnScopeMatch[1])}:`,
+		...registryLines.map(line => `    ${line}`),
+		...authLines.map(line => `    ${line}`),
+		"",
+	].join("\n")
+}
 
 const homeDir = process.env.HOME ?? process.env.userprofile!
 const pmFuncs = {
@@ -124,6 +152,19 @@ const pmFuncs = {
 			)
 		},
 	},
+	yarn: {
+		reset: async () => {
+			await Promise.all([
+				fs.rm(path.join(homeDir, ".yarnrc.yml"), { force: true }),
+				fs.rm(path.join(testPackageDir, ".yarn"), { force: true, recursive: true }),
+				fs.rm(path.join(testPackageDir, ".yarnrc.yml"), { force: true }),
+			])
+			await fs.writeFile(path.join(testPackageDir, ".yarnrc.yml"), yarnAuthConfig())
+		},
+		login: async (token: string) => {
+			await fs.writeFile(path.join(testPackageDir, ".yarnrc.yml"), yarnAuthConfig(token))
+		},
+	},
 } as const
 
 async function updateTestManifest(fn: (manifest: { version: string }) => void) {
@@ -143,9 +184,6 @@ const bumpTestManifest = async () =>
 		manifest.version = inc(manifest.version, "patch")!
 	})
 
-afterAll(async () => {
-})
-
 beforeEach(async () => {
 	await resetTestManifestVersion()
 	await pmFuncs.npm.reset()
@@ -159,11 +197,8 @@ for (const key in instances) {
 			it("1. publish need-login (noTTY)", async () => {
 				await bumpTestManifest()
 
-				const result = await x(
-					"mise",
-					["exec", `${pmName}@${version}`, "--", pmName, "publish", "--json", "--no-git-checks"],
-					execOptions(),
-				)
+				const args = publishArgs[pmName](version)
+				const result = await x(args[0]!, args.slice(1), execOptions())
 
 				assertMatchesSnapshot(result)
 			})
@@ -172,11 +207,8 @@ for (const key in instances) {
 				await bumpTestManifest()
 				await pmFuncs[pmName].login(env.NPM_READONLY_TOKEN)
 
-				const result = await x(
-					"mise",
-					["exec", `${pmName}@${version}`, "--", pmName, "publish", "--json", "--no-git-checks"],
-					execOptions(),
-				)
+				const args = publishArgs[pmName](version)
+				const result = await x(args[0]!, args.slice(1), execOptions())
 
 				assertMatchesSnapshot(result)
 			})
@@ -185,11 +217,8 @@ for (const key in instances) {
 				await bumpTestManifest()
 				await pmFuncs[pmName].login(env.NPM_WRITE_NO_BYPASS_TOKEN)
 
-				const result = await x(
-					"mise",
-					["exec", `${pmName}@${version}`, "--", pmName, "publish", "--json", "--no-git-checks"],
-					execOptions(),
-				)
+				const args = publishArgs[pmName](version)
+				const result = await x(args[0]!, args.slice(1), execOptions())
 
 				assertMatchesSnapshot(result)
 			})
@@ -198,11 +227,8 @@ for (const key in instances) {
 				await resetTestManifestVersion()
 				await pmFuncs[pmName].login(env.NPM_WRITE_WITH_BYPASS_TOKEN)
 
-				const result = await x(
-					"mise",
-					["exec", `${pmName}@${version}`, "--", pmName, "publish", "--json", "--no-git-checks"],
-					execOptions(),
-				)
+				const args = publishArgs[pmName](version)
+				const result = await x(args[0]!, args.slice(1), execOptions())
 
 				assertMatchesSnapshot(result)
 			})
