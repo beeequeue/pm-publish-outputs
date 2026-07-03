@@ -14,10 +14,10 @@ run = "docker compose up -d"
 
 [tasks.setup]
 interactive = true
-run = "podman compose exec -w /app -it instance mise i && aube i"
+run = "docker compose exec -w /app -it instance mise i && aube i"
 raw_args = true
 
 [tasks.test]
 interactive = true
-run = "podman compose exec -w /app -it instance aube exec vitest run -u"
+run = "docker compose exec -w /app -it instance aube exec vitest run -u"
 raw_args = true
