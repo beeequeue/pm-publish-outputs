@@ -166,26 +166,26 @@ npm error A complete log of this run can be found in: [npm-cache]/npm/_logs/[dat
 }
 `;
 
-exports[`pnpm@10 > 1. publish need-login (noTTY) 1`] = `
+exports[`npm@12 > 1. publish need-login (noTTY) 1`] = `
 {
   "code": 1,
   "stderr": "npm error code ENEEDAUTH
 npm error need auth This command requires you to be logged in to https://registry.npmjs.org/
-npm error need auth You need to authorize this machine using \`npm adduser\`
+npm error need auth You need to authorize this machine using \`npm login\`
 npm error A complete log of this run can be found in: [npm-cache]/npm/_logs/[date]T[time]-debug-0.log
 ",
   "stdout": "{
   "error": {
     "code": "ENEEDAUTH",
     "summary": "This command requires you to be logged in to https://registry.npmjs.org/",
-    "detail": "You need to authorize this machine using \`npm adduser\`"
+    "detail": "You need to authorize this machine using \`npm login\`"
   }
 }
 ",
 }
 `;
 
-exports[`pnpm@10 > 2. publish not allowed (noTTY) 1`] = `
+exports[`npm@12 > 2. publish not allowed (noTTY) 1`] = `
 {
   "code": 1,
   "stderr": "npm notice Publishing to https://registry.npmjs.org/ with tag latest and default access
@@ -205,7 +205,7 @@ npm error A complete log of this run can be found in: [npm-cache]/npm/_logs/[dat
 }
 `;
 
-exports[`pnpm@10 > 3. publish need-2fa (noTTY) 1`] = `
+exports[`npm@12 > 3. publish need-2fa (noTTY) 1`] = `
 {
   "code": 1,
   "stderr": "npm notice Publishing to https://registry.npmjs.org/ with tag latest and default access
@@ -231,7 +231,7 @@ npm error A complete log of this run can be found in: [npm-cache]/npm/_logs/[dat
 }
 `;
 
-exports[`pnpm@10 > 4. publish already-published (noTTY) 1`] = `
+exports[`npm@12 > 4. publish already-published (noTTY) 1`] = `
 {
   "code": 1,
   "stderr": "npm error You cannot publish over the previously published versions: [current-version].
@@ -241,6 +241,91 @@ npm error A complete log of this run can be found in: [npm-cache]/npm/_logs/[dat
   "error": {
     "summary": "You cannot publish over the previously published versions: [current-version].",
     "detail": ""
+  }
+}
+",
+}
+`;
+
+exports[`pnpm@10 > 1. publish need-login (noTTY) 1`] = `
+{
+  "code": 1,
+  "stderr": "npm error code ENEEDAUTH
+npm error need auth This command requires you to be logged in to https://registry.npmjs.org/
+npm error need auth You need to authorize this machine using \`npm adduser\`
+npm error A complete log of this run can be found in: [npm-cache]/npm/_logs/[date]T[time]-debug-0.log
+",
+  "stdout": "{
+  "error": {
+    "code": "ENEEDAUTH",
+    "summary": "This command requires you to be logged in to https://registry.npmjs.org/",
+    "detail": "You need to authorize this machine using \`npm adduser\`"
+  }
+}
+",
+}
+`;
+
+exports[`pnpm@10 > 2. publish not allowed (noTTY) 1`] = `
+{
+  "code": 1,
+  "stderr": "npm notice Publishing to https://registry.npmjs.org/ with tag latest and default access
+npm error code E403
+npm error 403 403 Forbidden - PUT https://registry.npmjs.org/[pkg-name] - You may not perform that action with these credentials.
+npm error 403 In most cases, you or one of your dependencies are requesting
+npm error 403 a package version that is forbidden by your security policy, or
+npm error 403 on a server you do not have access to.
+npm error A complete log of this run can be found in: [npm-cache]/npm/_logs/[date]T[time]-debug-0.log
+",
+  "stdout": "{
+  "error": {
+    "code": "E403",
+    "summary": "403 Forbidden - PUT https://registry.npmjs.org/[pkg-name] - You may not perform that action with these credentials.",
+    "detail": "In most cases, you or one of your dependencies are requesting/na package version that is forbidden by your security policy, or/non a server you do not have access to."
+  }
+}
+",
+}
+`;
+
+exports[`pnpm@10 > 3. publish need-2fa (noTTY) 1`] = `
+{
+  "code": 1,
+  "stderr": "npm notice Publishing to https://registry.npmjs.org/ with tag latest and default access
+npm error code EOTP
+npm error This operation requires a one-time password from your authenticator.
+npm error You can provide a one-time password by passing --otp=<code> to the command you ran.
+npm error If you already provided a one-time password then it is likely that you either typoed
+npm error it, or it timed out. Please try again.
+npm error A complete log of this run can be found in: [npm-cache]/npm/_logs/[date]T[time]-debug-0.log
+",
+  "stdout": "{
+  "error": {
+    "code": "EOTP",
+    "summary": "This operation requires a one-time password from your authenticator.",
+    "detail": "You can provide a one-time password by passing --otp=<code> to the command you ran./nIf you already provided a one-time password then it is likely that you either typoed/nit, or it timed out. Please try again."
+  }
+}
+",
+}
+`;
+
+exports[`pnpm@10 > 4. publish already-published (noTTY) 1`] = `
+{
+  "code": 1,
+  "stderr": "npm notice Publishing to https://registry.npmjs.org/ with tag latest and default access
+npm error code E403
+npm error 403 403 Forbidden - PUT https://registry.npmjs.org/[pkg-name] - You cannot publish over the previously published versions: [current-version].
+npm error 403 In most cases, you or one of your dependencies are requesting
+npm error 403 a package version that is forbidden by your security policy, or
+npm error 403 on a server you do not have access to.
+npm error A complete log of this run can be found in: [npm-cache]/npm/_logs/[date]T[time]-debug-0.log
+",
+  "stdout": "{
+  "error": {
+    "code": "E403",
+    "summary": "403 Forbidden - PUT https://registry.npmjs.org/[pkg-name] - You cannot publish over the previously published versions: [current-version].",
+    "detail": "In most cases, you or one of your dependencies are requesting/na package version that is forbidden by your security policy, or/non a server you do not have access to."
   }
 }
 ",
@@ -282,7 +367,9 @@ exports[`pnpm@11 > 3. publish need-2fa (noTTY) 1`] = `
   "stdout": "{
   "error": {
     "code": "ERR_PNPM_OTP_NON_INTERACTIVE",
-    "message": "The registry requires additional authentication, but pnpm is not running in an interactive terminal"
+    "message": "The registry requires additional authentication, but pnpm is not running in an interactive terminal",
+    "authUrl": "https://www.npmjs.com/auth/cli/[uuid]",
+    "doneUrl": "https://registry.npmjs.org/-/v1/done?authId=[uuid]"
   }
 }
 ",

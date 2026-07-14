@@ -4,8 +4,8 @@ auto_install = false
 [tools]
 aube = "1.25.1"
 node = "26"
-npm = ["11", "10"]
-pnpm = ["11", "10"]
+npm = ["10", "11", "12"]
+pnpm = ["10", "11"]
 yarn = ["4"]
 
 [tasks.start-container]

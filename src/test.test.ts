@@ -94,7 +94,7 @@ const execOptions = (tty: "tty" | "no-tty" = "no-tty"): Partial<Options> => ({
 
 const instances = {
 	pnpm: ["10", "11"],
-	npm: ["10", "11"],
+	npm: ["10", "11", "12"],
 	yarn: ["4"],
 } as const
 
